@@ -1,0 +1,59 @@
+{
+  "name": "cash-kiosk",
+  "version": "2.3.0",
+  "description": "Cash Kiosk desktop application",
+  "main": "src/main.js",
+  "author": "Cash Kiosk",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "ir.itsaman.cashkiosk",
+    "productName": "Cash Kiosk",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Cash-Kiosk-Setup-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "extraResources": [
+      {
+        "from": "src/coordination-server.js",
+        "to": "coordination-server.js"
+      },
+      {
+        "from": "src/raw-numpad-helper.ps1",
+        "to": "raw-numpad-helper.ps1"
+      }
+    ]
+  },
+  "allowScripts": {
+    "electron@38.8.6": true
+  }
+}
